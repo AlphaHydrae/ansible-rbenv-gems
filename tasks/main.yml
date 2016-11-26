@@ -1,0 +1,9 @@
+---
+- name: Install gem with rbenv
+  command: gem install --no-rdoc --no-ri {{ item.name }} creates={{ rbenv_gems_shims }}/{{ item.bin | default(item.name) }}
+  become: true
+  become_user: "{{ rbenv_gems_user }}"
+  environment:
+    RBENV_VERSION: "{{ rbenv_gems_ruby_version }}"
+    PATH: "{{ rbenv_gems_shims }}:{{ ansible_env.PATH }}"
+  with_items: "{{ rbenv_gems }}"

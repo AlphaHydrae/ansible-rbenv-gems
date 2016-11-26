@@ -1,0 +1,21 @@
+galaxy_info:
+  author: Simon Oulevay (Alpha Hydrae)
+  description: Installs a Ruby gem with rbenv.
+  license: MIT
+  min_ansible_version: 2.0
+
+  platforms:
+    - name: Darwin
+      versions:
+        - all
+
+  galaxy_tags:
+    - ruby
+    - gem
+    - rbenv
+
+allow_duplicates: yes
+
+dependencies:
+  - role: AlphaHydrae.multipass
+  - role: AlphaHydrae.rbenv
