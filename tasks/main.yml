@@ -1,4 +1,5 @@
 ---
+
 - name: Install gem with rbenv
   command: gem install --no-document {{ item.name }} creates={{ rbenv_gems_shims }}/{{ item.bin | default(item.name) }}
   become: true
@@ -6,4 +7,14 @@
   environment:
     RBENV_VERSION: "{{ rbenv_gems_ruby_version }}"
     PATH: "{{ rbenv_gems_shims }}:{{ ansible_env.PATH }}"
+  register: rbenv_install_result
   with_items: "{{ rbenv_gems }}"
+
+- name: Rehash rbenv gems
+  command: "{{ rbenv_bin }} rehash"
+  environment:
+    PATH: "{{ rbenv_root }}:{{ ansible_env.PATH }}"
+  become: true
+  become_user: "{{ rbenv_homebrew_user }}"
+  changed_when: true
+  when: rbenv_install_result is changed
