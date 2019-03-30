@@ -1,4 +1,5 @@
 ---
+rbenv_gems_bin: "/usr/local/bin/rbenv"
 rbenv_gems_user: "{{ rbenv_user | default(user) | default(omit) }}"
 rbenv_gems_user_home: "{{ host_user_homes }}/{{ rbenv_gems_user }}"
 rbenv_gems_shims: "{{ rbenv_gems_user_home }}/.rbenv/shims"

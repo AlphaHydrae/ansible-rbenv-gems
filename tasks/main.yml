@@ -1,7 +1,9 @@
 ---
 
 - name: Install gem with rbenv
-  command: gem install --no-document {{ item.name }} creates={{ rbenv_gems_shims }}/{{ item.bin | default(item.name) }}
+  command: gem install --no-document {{ item.name }}
+  args:
+    creates: "{{ rbenv_gems_shims }}/{{ item.bin | default(item.name) }}"
   become: true
   become_user: "{{ rbenv_gems_user }}"
   environment:
